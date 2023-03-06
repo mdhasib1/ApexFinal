@@ -1,0 +1,77 @@
+.logo {
+  height: 50px;
+}
+
+.navbar {
+  background-color: transparent;
+  transition: background-color 0.5s ease;
+  z-index: 9999;
+}
+
+.navbar.sticky {
+  background: linear-gradient(90deg, #8000ff, #18014a, #39035a) !important;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  background-color: #000;
+}
+
+.navbar-brand {
+  color: #ffffff;
+}
+
+.logo {
+  width: 200px;
+}
+
+.logo img {
+  width: 100%;
+}
+
+.nav-link {
+  color: #ffffff;
+  margin-left: 1rem;
+}
+
+.avatar {
+  color: #fff;
+  font-size: 28px;
+}
+
+.scrolled {
+  background: linear-gradient(90deg, #8000ff, #18014a, #39035a) !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.fixed-top.bg-dark {
+  background: linear-gradient(90deg, #8000ff, #18014a, #39035a) !important;
+}
+
+@media screen and (max-width: 768px) {
+  .logo {
+    height: 30px;
+  }
+
+  .navbar {
+    background-color: #3b0488;
+  }
+
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+
+  .nav-link {
+    margin-left: 0;
+    margin-right: 1rem;
+  }
+
+  .hero-content {
+    top: 40%;
+  }
+}
+
+.dropdown-menu.dd-menu.dropdown-menu-end.shadow.border-0.mt-3.pb-3.pt-0.overflow-hidden.rounded.show {
+  background: #2f046f;
+  color: #fff !important;
+}

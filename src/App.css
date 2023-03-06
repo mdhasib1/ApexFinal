@@ -1,38 +1,68 @@
-.App {
-  text-align: center;
+.card {
+  background: linear-gradient(120deg, #9105dc, #22014a, #9105dc) !important;
+  color: #fff !important;
+  box-shadow: rgba(0, 0, 0, 0.368) 1.95px 1.95px 2.6px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.card:hover {
+  box-shadow: rgba(8, 8, 62, 0.484) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+  background: linear-gradient(120deg, #000000, #7101fb, #020202) !important;
+  color: #fff !important;
+}
+footer {
+  background: linear-gradient(
+    150deg,
+    #380641,
+    #310f7a,
+    #3b0b5b,
+    #0b2255,
+    #001b9f
+  );
+  color: #fff !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+footer a {
+  text-decoration: none;
+  color: #fff !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.logo-footer {
+  width: 50px !important;
+}
+
+.logo-footer img {
+  width: 60%;
+}
+
+.bg-half-170 {
+  padding: 120px 0 !important;
+}
+
+a#back-to-top {
+  width: 60px;
+  height: 60px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #000;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  font-size: 25px !important;
+  font-weight: 900;
+  font-style: bold;
+  color: #fff;
 }
 
-.App-link {
-  color: #61dafb;
+.footer-py-30.footer-bar {
+  padding: 20px;
+  border-top: 1px solid #45454b5e;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.team-image.w-100.d-inline-block.mx-auto.rounded-pill.shadow.avatar.avatar-ex-large.overflow-hidden {
+  width: 180px !important;
+  height: 180px;
 }

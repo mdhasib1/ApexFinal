@@ -1,0 +1,14 @@
+.collection {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.collectionProfile {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+}
+
+.collectionProfile img {
+  width: 100%;
+}
