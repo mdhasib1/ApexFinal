@@ -1,0 +1,33 @@
+.product-summary {
+  width: 100%;
+  padding: 10px;
+  .info-summary {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+    .info-box {
+      height: 150px;
+    }
+  }
+}
+
+.card2 {
+  background-color: #4b05d9;
+}
+.card3 {
+  background-color: #4b05d9;
+}
+
+.bar {
+  text-align: left;
+  padding: 10px;
+}
+
+.info-icon {
+  svg {
+    color: #4b05d9 !important;
+    width: 60px !important;
+    height: 60px !important;
+  }
+}

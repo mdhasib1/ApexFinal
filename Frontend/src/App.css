@@ -1,0 +1,206 @@
+.card {
+  background: linear-gradient(120deg, #9105dc, #30014a, #9105dc) !important;
+  color: #fff !important;
+  box-shadow: rgba(5, 3, 3, 0.621) 10px 10px 20px 0px;
+}
+
+.card:hover {
+  box-shadow: rgb(45, 2, 76) 3px 3px 6px 0px inset,
+    rgb(45, 2, 76) -3px -3px 6px 1px inset;
+  background: linear-gradient(90deg, #590182, #b801fb, #590182) !important;
+  color: #fff !important;
+}
+footer {
+  background: linear-gradient(
+    150deg,
+    #380641,
+    #310f7a,
+    #3b0b5b,
+    #0b2255,
+    #001b9f
+  );
+  color: #fff !important;
+}
+
+footer a {
+  text-decoration: none;
+  color: #fff !important;
+}
+
+.logo-footer {
+  width: 50px !important;
+}
+
+.logo-footer img {
+  width: 60%;
+}
+
+.bg-half-170 {
+  padding: 120px 0 !important;
+}
+
+a#back-to-top {
+  width: 60px;
+  height: 60px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  font-size: 25px !important;
+  font-weight: 900;
+  font-style: bold;
+  color: #fff;
+}
+
+.footer-py-30.footer-bar {
+  padding: 20px;
+  border-top: 1px solid #45454b5e;
+}
+
+.team-image.w-100.d-inline-block.mx-auto.rounded-pill.shadow.avatar.avatar-ex-large.overflow-hidden {
+  width: 180px !important;
+  height: 180px;
+}
+
+.bg-creator-profile,
+.bg-item-detail,
+.bg-half-174 {
+  padding: 174px 0 100px;
+  background-size: cover;
+  align-self: center;
+  position: relative;
+  background-position: center center;
+}
+.profile-pic,
+.profile-banner {
+  position: relative;
+  color: transparent;
+}
+
+.profile-pic input,
+.profile-banner input {
+  display: none;
+}
+
+.profile-pic .icons,
+.profile-banner .icons {
+  cursor: pointer;
+  z-index: 1;
+}
+
+.profile-banner {
+  margin: auto !important;
+  width: 100% !important;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-banner {
+  margin-top: -157px !important;
+}
+
+.profile-pic {
+  margin-top: -75px;
+}
+
+.profile-banner img {
+  width: 1200px;
+  height: 200px;
+}
+
+.img-group .user-avatar img {
+  position: relative;
+  transition: all 0.5s ease;
+}
+
+.img-group .user-avatar img:hover {
+  z-index: 1;
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .avatar.avatar-wallet {
+    height: 50px;
+    width: 50px;
+  }
+}
+
+.avatar.avatar-ex-sm {
+  max-height: 25px;
+}
+
+.avatar.avatar-md-sm {
+  height: 54px;
+  width: 54px;
+}
+
+.avatar.avatar-small {
+  height: 65px;
+  width: 65px;
+}
+
+.avatar.avatar-md-md {
+  height: 80px;
+  width: 80px;
+}
+
+.avatar.avatar-medium {
+  height: 110px;
+  width: 110px;
+}
+
+.avatar.avatar-large {
+  height: 140px;
+  width: 140px;
+}
+
+.avatar.avatar-ex-large {
+  height: 180px;
+  width: 180px;
+}
+
+.avatar.avatar-300 {
+  height: 300px;
+  width: 300px;
+}
+iframe.w-100.h-100 {
+  height: 400px !important;
+}
+
+.bg-creator-profile,
+.bg-item-detail,
+.bg-half-174 {
+  padding: 174px 0 100px;
+  background-size: cover;
+  align-self: center;
+  position: relative;
+  background-position: center center;
+}
+
+.bg-creator-profile,
+.bg-item-detail,
+.bg-half-174 {
+  padding: 174px 0 100px;
+  background-size: cover;
+  align-self: center;
+  position: relative;
+  background-position: center center;
+}
+
+.sticky-bar {
+  box-shadow: rgb(251, 5, 218) 0.2px 0.2px 20px;
+  padding: 50px;
+  border-radius: 8px;
+}
+
+.modal-content {
+  background: linear-gradient(120deg, #9105dc, #30014a, #9105dc) !important;
+}
+.ql-editor.ql-blank {
+  height: 500px;
+}

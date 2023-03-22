@@ -1,0 +1,15 @@
+.bg-half-170 {
+  background: url("../../../public/Images/banner.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 50px !important;
+  background-attachment: fixed;
+}
+
+.preview-box {
+  width: 100%;
+}
+
+.preview-box img {
+  width: 100%;
+}

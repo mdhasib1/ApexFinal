@@ -1,0 +1,19 @@
+.nftcard {
+  border-radius: 12px;
+  height: 400px !important;
+}
+
+.nftcard {
+  position: relative;
+  overflow: hidden !important;
+  transition: all 0.3s ease-out;
+}
+
+.nftcard:hover .card-img-top {
+  transform: scale(1.09);
+  top: 0;
+}
+
+.nftcard .card-img-top {
+  transition: all 0.3s ease-out;
+}
