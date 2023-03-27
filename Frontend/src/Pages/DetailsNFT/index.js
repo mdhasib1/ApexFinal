@@ -430,8 +430,8 @@ const  createBid = async (e) => {
 
                           <div className="ms-3">
                             <h6 className="mb-0">
-                              <a
-                                href="/creators"
+                              <Link
+                                to="/creators"
                                 onClick={e => {
                                   e.preventDefault()
                                   navigate('/creators')
@@ -439,7 +439,7 @@ const  createBid = async (e) => {
                                 className="text-dark name"
                               >
                               {shortenAddress(nft?.owner)}
-                              </a>
+                              </Link>
                             </h6>
                           </div>
                         </div>
@@ -463,8 +463,8 @@ const  createBid = async (e) => {
                           <div className="ms-3">
                             <h6 className="mb-0">
                               2 WETH <span className="text-muted">by</span>{' '}
-                              <a
-                                href="/creator-profile"
+                              <Link
+                                to="/creator-profile"
                                 onClick={e => {
                                   e.preventDefault()
                                   navigate('/creator-profile')
@@ -472,7 +472,7 @@ const  createBid = async (e) => {
                                 className="text-dark name"
                               >
                                 0xe849fa28a...ea14
-                              </a>
+                              </Link>
                             </h6>
                             <small className="text-muted">6 hours ago</small>
                           </div>
@@ -490,8 +490,8 @@ const  createBid = async (e) => {
                           <div className="ms-3">
                             <h6 className="mb-0">
                               0.001 WETH <span className="text-muted">by</span>{' '}
-                              <a
-                                href="/creator-profile"
+                              <Link
+                                to="/creator-profile"
                                 onClick={e => {
                                   e.preventDefault()
                                   navigate('/creator-profile')
@@ -499,7 +499,7 @@ const  createBid = async (e) => {
                                 className="text-dark name"
                               >
                                 VOTwear
-                              </a>
+                              </Link>
                             </h6>
                             <small className="text-muted">6 hours ago</small>
                           </div>
@@ -517,8 +517,8 @@ const  createBid = async (e) => {
                           <div className="ms-3">
                             <h6 className="mb-0">
                               1.225 WETH <span className="text-muted">by</span>{' '}
-                              <a
-                                href="/creator-profile"
+                              <Link
+                                to="/creator-profile"
                                 onClick={e => {
                                   e.preventDefault()
                                   navigate('/creator-profile')
@@ -526,7 +526,7 @@ const  createBid = async (e) => {
                                 className="text-dark name"
                               >
                                 PandaOne
-                              </a>
+                              </Link>
                             </h6>
                             <small className="text-muted">6 hours ago</small>
                           </div>
@@ -642,15 +642,15 @@ const  createBid = async (e) => {
                     </div>
 
                     <div className="nft-image rounded-md mt-3 position-relative overflow-hidden">
-                      <a
-                        href="/item-detail-one"
+                      <Link
+                        to="/item-detail-one"
                         onClick={e => {
                           e.preventDefault()
                           navigate('/item-detail-one')
                         }}
                       >
                         <img src={data?.image} className="img-fluid" alt="" />
-                      </a>
+                      </Link>
                       <div className="position-absolute top-0 start-0 m-2">
                         <Link
                           onClick={e => e.preventDefault()}
@@ -673,8 +673,8 @@ const  createBid = async (e) => {
                     </div>
 
                     <div className="card-body content position-relative p-0 mt-3">
-                      <a
-                        href="/item-detail-one"
+                      <Link
+                        to="/item-detail-one"
                         onClick={e => {
                           e.preventDefault()
                           navigate('/item-detail-one')
@@ -682,7 +682,7 @@ const  createBid = async (e) => {
                         className="title text-dark h6"
                       >
                         {data?.title}
-                      </a>
+                      </Link>
 
                       <div className="d-flex align-items-center justify-content-between mt-3">
                         <div className="">
@@ -691,8 +691,8 @@ const  createBid = async (e) => {
                           </small>
                           <small className="rate fw-bold">20.5 ETH</small>
                         </div>
-                        <a
-                          href="/item-detail-one"
+                        <Link
+                          to="/item-detail-one"
                           onClick={e => {
                             e.preventDefault()
                             navigate('/item-detail-one')
@@ -700,7 +700,7 @@ const  createBid = async (e) => {
                           className="btn btn-icon btn-pills btn-primary"
                         >
                           <i className="uil uil-shopping-bag"></i>
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -800,8 +800,8 @@ const  createBid = async (e) => {
               your bid (1.27ETH) has been listing to our database
             </div>
             <div className="modal-footer">
-              <a
-                href="/activity"
+              <Link
+                to="/activity"
                 onClick={e => {
                   e.preventDefault()
                   navigate('/activity')
@@ -810,7 +810,7 @@ const  createBid = async (e) => {
                 className="btn btn-pills btn-primary"
               >
                 <i className="mdi mdi-basket-plus fs-5 me-2"></i> View Your Bid
-              </a>
+              </Link>
             </div>
           </div>
         </div>

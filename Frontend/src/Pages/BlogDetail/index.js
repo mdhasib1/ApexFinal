@@ -52,14 +52,14 @@ const BlogDetail = () => {
                   alt=""
                 />
                 <div className="play-icon">
-                  <a
-                    href="#!"
+                  <Link
+                    to="#!"
                     data-type="youtube"
                     data-id="yba7hPeTSjk"
                     className="play-btn lightbox"
                   >
                     <i className="mdi mdi-play text-primary rounded-circle bg-white shadow-lg icons"></i>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

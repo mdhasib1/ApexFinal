@@ -33,15 +33,15 @@ const Terms = () => {
                 style={{ backgroundColor: 'transparent' }}
               >
                 <li className="breadcrumb-item text-center">
-                  <a
-                    href="/index"
+                  <Link
+                    to="/index"
                     onClick={e => {
                       e.preventDefault()
                       navigate('/index')
                     }}
                   >
                     Dragon
-                  </a>
+                  </Link>
                 </li>
                 <li className="breadcrumb-item active" aria-current="page">
                   Terms

@@ -4,13 +4,15 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const errorHandler = require("./MiddleWare/errorMiddleware");
-const NFTs = require("./routes/nftRoutes");
+const NFTs = require("./Routes/NFTsRoutes");
 // const errorHandler = require("./middleWare/errorMiddleware");
 const cookieParser = require("cookie-parser");
 const ImageRoute = require('./Routes/ImageRoutes')
 const abiRoute = require('./Routes/abiRoutes')
 const User = require('./Routes/userRoute')
-
+const totalCreator = require('./Routes/CreatorRoutes')
+const Collection = require('./Routes/CollectionRoutes')
+ 
 const path = require("path");
 
 env.config()
@@ -39,7 +41,9 @@ app.use("uploads", express.static("uploads"));
 app.use("/api/nfts", NFTs);
 app.use("/api/uploads", ImageRoute);
 app.use("/api/abi", abiRoute);
-app.use("/api/user", User);
+app.use("/api/users", User);
+app.use("/api/creator", totalCreator);
+app.use("/api/collection", Collection);
 
 
 // Error Middleware

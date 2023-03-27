@@ -129,9 +129,9 @@ const NavBar = ({isMobile}) => {
                       </span>{" "}
                       Profile
                     </Link>
-                    <a
+                    <Link
                       className="dropdown-item px-3 py-2 border-bottom small fw-semibold text-light d-flex align-items-center"
-                      href="/creator-profile-edit"
+                      to="/creator-profile-edit"
                       onClick={(e) => {
                         e.preventDefault();
                         setTimeout(() => {
@@ -143,10 +143,10 @@ const NavBar = ({isMobile}) => {
                         <i className="uil uil-cog align-middle h6 mb-0 me-1"></i>
                       </span>{" "}
                       Settings
-                    </a>
-                    <a
+                    </Link>
+                    <Link
                       className="dropdown-item small px-3 py-2 border-bottom fw-semibold text-light d-flex align-items-center"
-                      href="/lock-screen"
+                      to="/lock-screen"
                       onClick={(e) => {
                         e.preventDefault();
                         setTimeout(() => {
@@ -159,7 +159,7 @@ const NavBar = ({isMobile}) => {
                         <i className="uil uil-sign-out-alt align-middle h6 mb-0 me-1"></i>
                       </span>{" "}
                       Logout
-                    </a>
+                    </Link>
                   </div>
                 </div>
            

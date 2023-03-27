@@ -1,9 +1,63 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import { dragon } from '../../Components/imageImport/index'
+import React, { useState } from 'react';
+import { useDispatch } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { dragon } from '../../Components/imageImport/index';
+import { SET_LOGIN, SET_NAME } from "../../redux/features/auth/authSlice";
+import { loginUser } from "../../services/authService";
+
+const initialState = {
+  address: "",
+  password: "",
+};
 
 const LockScreen = () => {
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation()
+  const { address } = location.state;
+  const [formData, setformData] = useState(initialState);
+  const { password } = formData;
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setformData({ ...formData, [name]: value });
+  };
+
+
+  const login = async (e) => {
+    e.preventDefault();
+
+    if (!address || !password) {
+      return toast.error("All fields are required");
+    }
+
+
+    const userData = {
+      address,
+      password,
+    };
+    setIsLoading(true);
+    try {
+      const data = await loginUser(userData);
+      console.log(data);
+      await dispatch(SET_LOGIN(true));
+      await dispatch(SET_NAME(data.token));
+  
+      // Check the user's role and navigate accordingly
+      if (data.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/profile");
+      }
+  
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <>
       <section className="position-relative">
@@ -17,7 +71,7 @@ const LockScreen = () => {
                 {/* Start Content */}
                 <div className="title-heading text-center my-auto">
                   <div className="form-signin w-50 m-auto px-4 py-5 bg-white rounded-md shadow-sm">
-                    <form>
+                    <form onSubmit={login}>
                       <div className="row">
                         <div className="col-lg-12">
                           <div className="mb-3 text-center">
@@ -33,10 +87,28 @@ const LockScreen = () => {
                         <div className="col-12">
                           <div className="form-floating mb-3">
                             <input
+                              type="text"
+                              className="form-control"
+                              id="LoginAddress"
+                              required
+                              name="address"
+                              value={address}
+                              readOnly
+                            />
+                            <label htmlFor="LoginPassword">Address:</label>
+                          </div>
+                        </div>
+                        <div className="col-12">
+                          <div className="form-floating mb-3">
+                            <input
                               type="password"
                               className="form-control"
                               id="LoginPassword"
                               placeholder="Password"
+                              required
+                              name="password"
+                              value={password}
+                              onChange={handleInputChange}
                             />
                             <label htmlFor="LoginPassword">Password:</label>
                           </div>
@@ -61,8 +133,8 @@ const LockScreen = () => {
                               </div>
                             </div>
                             <small className="text-muted mb-0">
-                              <a
-                                href="/reset-password"
+                              <Link
+                                to="/reset-password"
                                 onClick={e => {
                                   e.preventDefault()
                                   navigate('/reset-password')
@@ -70,7 +142,7 @@ const LockScreen = () => {
                                 className="text-muted fw-semibold"
                               >
                                 Forgot password ?
-                              </a>
+                              </Link>
                             </small>
                           </div>
                         </div>

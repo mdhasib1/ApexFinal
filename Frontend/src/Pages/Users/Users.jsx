@@ -1,71 +1,89 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import UserList from "../../components/UsersList/UsersList.jsx";
-import useRedirectLoggedOutUser from "../../customHook/useRedirectLoggedOutUser";
-import { selectIsLoggedIn, SET_NAME, SET_USER } from "../../redux/features/auth/authSlice";
-import { getProducts } from "../../redux/features/Course/CourseSlice";
-import { getUser } from "../../services/authService";
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import "react-confirm-alert/src/react-confirm-alert.css";
+import './user.scss';
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
-const AllUsers = () => {
-  useRedirectLoggedOutUser("/login");
-  const dispatch = useDispatch();
+const API_URL = `${BACKEND_URL}/api/users`;
 
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-  const {  isLoading, isError, message } = useSelector(
-    (state) => state.product
-  );
+function Users() {
 
-  useRedirectLoggedOutUser("/login");
-  const navigate = useNavigate();
+  const [users, setUsers] = useState([]);
 
-  const [profile, setProfile] = useState(null);
-  const [user , setUser] = useState(null)
-  const [status, setStatus] = useState(null)
 
   useEffect(() => {
-    async function getUserData() {
-      const data = await getUser();
-      setUser(data._id)
-      setProfile(data.role);
-      await dispatch(SET_USER(data));
-      await dispatch(SET_NAME(data.name));
-    }
-    getUserData();
-  }, [dispatch]);
+   axios.get(`${API_URL}/getusers`)
+   .then((response)=>{
+     setUsers(response.data.users)
+   })
+  }, []);
 
-  useEffect(()=>{
-    axios.get(`http://localhost:8000/api/order/${user}`)
-    .then((res)=>{
-      setStatus(res.data.order.status)
-    })
-  },[user])
 
-  const redirect = async(e)=>{
-    if(profile==='student' || profile==='affiliater'){
-      navigate('/profile')
-    }
+ const deleteCollection = async (id) => {
+  try {
+    const response = await axios.delete(`${API_URL}/${id}`);
+    return response.data;
+  } catch (error) {
+    throw error.response.data.message;
   }
-
-  redirect()
-
-  useEffect(() => {
-    if (isLoggedIn === true) {
-      dispatch(getProducts());
-    }
-
-    if (isError) {
-      console.log(message);
-    }
-  }, [isLoggedIn, isError, message, dispatch]);
-
-  return (
-    <div className="dashboard">
-
-      <UserList isLoading={isLoading} />
-    </div>
-  );
 };
 
-export default AllUsers;
+
+const handleDelete = async (id) => {
+  try {
+    await deleteCollection(id);
+    setUsers(users.filter((user) => user._id !== id));
+  } catch (error) {
+    console.error('Error deleting collection:', error);
+  }
+};
+
+  return (
+    <div className="table">
+    <div className="--flex-between --flex-dir-column">
+      <span>
+        <h3>All Users </h3>
+      </span>
+    </div>
+
+    <div className="table">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Member ID</th>
+              <th>Role</th>
+              <th>Action</th>
+              
+
+            </tr>
+          </thead>
+
+          <tbody>
+           {users.map((user, index)=>(
+                <tr key={index + 1}>
+                  <td>{user.name}</td>
+                  <td>
+                    {user.email}
+                  </td>
+                  <td>
+                    {user.memberId}
+                  </td>
+                  <td>
+                    {user.role}
+                  </td>
+                  <td className="icons">
+                     <button onClick={() => handleDelete(user._id)} className="btn btn-danger">Delete</button>
+                  </td>
+                </tr>
+                ))}
+          </tbody>
+        </table>
+    </div>
+
+  </div>
+  )
+}
+
+export default Users

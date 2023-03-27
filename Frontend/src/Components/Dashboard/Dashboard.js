@@ -1,4 +1,5 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { AiFillDollarCircle } from "react-icons/ai";
 import { FaUsers } from "react-icons/fa";
 import { FcBiotech, FcSalesPerformance } from 'react-icons/fc';
@@ -20,24 +21,27 @@ export const formatNumbers = (x) => {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 const Analytices = () => {
 
 
-  // const navigate = useNavigate();
-  // const dispatch = useDispatch();
-  // const [user , setUser] = useState(null)
+  const [creator,setCreator] = useState([])
+  const [collection,setCollection] = useState([])
 
+  useEffect(()=>{
+     axios.get(`${BACKEND_URL}/api/creator`)
+     .then((res)=>{
+      setCreator(res.data.numberOfCreator)
+     })
+  },[])
+  useEffect(()=>{
+     axios.get(`${BACKEND_URL}/api/collection/totalCollection`)
+     .then((res)=>{
+      setCollection(res.data.numberOfCollection)
+     })
+  },[])
 
-
-  // useEffect(() => {
-  //   async function getUserData() {
-  //     const data = await getUser();
-  //     setUser(data)
-  //     await dispatch(SET_USER(data));
-  //     await dispatch(SET_NAME(data.name));
-  //   }
-  //   getUserData();
-  // }, [dispatch]);
 
   return (
     <div className="product-summary">
@@ -72,14 +76,14 @@ const Analytices = () => {
           icon={FaUser}
           title={"Total Users"}
           bgColor="card3"
-          count={200000 }
+          count={creator }
           className="card"
         />
         <InfoBox
           icon={Collections}
           title={"Total Collection"}
           bgColor="card3"
-          count={2000 }
+          count={collection }
           className="card"
         />
         <InfoBox

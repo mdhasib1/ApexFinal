@@ -38,15 +38,15 @@ const Privacy = () => {
                 style={{ backgroundColor: 'transparent' }}
               >
                 <li className="breadcrumb-item">
-                  <a
-                    href="/index"
+                  <Link
+                    to="/"
                     onClick={e => {
                       e.preventDefault()
-                      navigate('/index')
+                      navigate('/')
                     }}
                   >
                     Superex
-                  </a>
+                  </Link>
                 </li>
                 <li className="breadcrumb-item active" aria-current="page">
                   Privacy

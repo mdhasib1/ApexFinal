@@ -38,26 +38,26 @@ const Faqs = () => {
                 style={{ backgroundColor: 'transparent' }}
               >
                 <li className="breadcrumb-item">
-                  <a
-                    href="/index"
+                  <Link
+                    to="/"
                     onClick={e => {
                       e.preventDefault()
-                      navigate('/index')
+                      navigate('/')
                     }}
                   >
                     Superex
-                  </a>
+                  </Link>
                 </li>
                 <li className="breadcrumb-item">
-                  <a
-                    href="/helpcenter-overview"
+                  <Link
+                    to="/helpcenter-overview"
                     onClick={e => {
                       e.preventDefault()
                       navigate('/helpcenter-overview')
                     }}
                   >
                     Help Center
-                  </a>
+                  </Link>
                 </li>
                 <li className="breadcrumb-item active" aria-current="page">
                   FAQs
@@ -96,24 +96,24 @@ const Faqs = () => {
                   id="navmenu-nav"
                 >
                   <li className={`navbar-item p-0 ${active === "1" ? "active" : ''}`} onClick={() => setActive('1')}>
-                    <a href="#getstart" className="h6 text-dark navbar-link">
+                    <Link to="#getstart" className="h6 text-dark navbar-link">
                       Getting started
-                    </a>
+                    </Link>
                   </li>
                   <li className={`navbar-item mt-3 p-0 ${active === "2" ? "active" : ''}`} onClick={() => setActive('2')}>
-                    <a href="#policy" className="h6 text-dark navbar-link">
+                    <Link to="#policy" className="h6 text-dark navbar-link">
                       Safety, Security, and Policies
-                    </a>
+                    </Link>
                   </li>
                   <li className={`navbar-item mt-3 p-0 ${active === "3" ? "active" : ''}`} onClick={() => setActive('3')}>
-                    <a href="#use" className="h6 text-dark navbar-link">
+                    <Link to="#use" className="h6 text-dark navbar-link">
                       Using Superex NFT
-                    </a>
+                    </Link>
                   </li>
                   <li className={`navbar-item mt-3 p-0 ${active === "4" ? "active" : ''}`} onClick={() => setActive('4')}>
-                    <a href="#support" className="h6 text-dark navbar-link">
+                    <Link to="#support" className="h6 text-dark navbar-link">
                       Support Questions
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>

@@ -9,12 +9,8 @@ const initialState = {
   isSuccess: false,
   isLoading: false,
   message: "",
-  totalStoreValue: 0,
-  outOfStock: 0,
-  category: [],
 };
 
-// Create New Product
 export const createUser = createAsyncThunk(
   "user/create",
   async (formData, thunkAPI) => {
@@ -33,7 +29,6 @@ export const createUser = createAsyncThunk(
   }
 );
 
-// Get all products
 export const getUsers = createAsyncThunk(
   "users/getAll",
   async (_, thunkAPI) => {
@@ -52,7 +47,6 @@ export const getUsers = createAsyncThunk(
   }
 );
 
-// Delete a Product
 export const deleteUser = createAsyncThunk(
   "users/delete",
   async (id, thunkAPI) => {
@@ -71,7 +65,6 @@ export const deleteUser = createAsyncThunk(
   }
 );
 
-// Get a product
 export const getUser = createAsyncThunk(
   "users/getUser",
   async (id, thunkAPI) => {
@@ -89,8 +82,8 @@ export const getUser = createAsyncThunk(
     }
   }
 );
-// Update product
-export const updateUesr = createAsyncThunk(
+
+export const updateUser = createAsyncThunk(
   "users/updateUser",
   async ({ id, formData }, thunkAPI) => {
     try {
@@ -109,50 +102,8 @@ export const updateUesr = createAsyncThunk(
 );
 
 const userSlice = createSlice({
-  token: "user",
+  name: "user",
   initialState,
-  reducers: {
-    CALC_STORE_VALUE(state, action) {
-      const products = action.payload;
-      const array = [];
-      products.map((item) => {
-        const { price, quantity } = item;
-        const productValue = price * quantity;
-        return array.push(productValue);
-      });
-      const totalValue = array.reduce((a, b) => {
-        return a + b;
-      }, 0);
-      state.totalStoreValue = totalValue;
-    },
-    CALC_OUTOFSTOCK(state, action) {
-      const products = action.payload;
-      const array = [];
-      products.map((item) => {
-        const { quantity } = item;
-
-        return array.push(quantity);
-      });
-      let count = 0;
-      array.forEach((number) => {
-        if (number === 0 || number === "0") {
-          count += 1;
-        }
-      });
-      state.outOfStock = count;
-    },
-    CALC_CATEGORY(state, action) {
-      const products = action.payload;
-      const array = [];
-      products.map((item) => {
-        const { category } = item;
-
-        return array.push(category);
-      });
-      const uniqueCategory = [...new Set(array)];
-      state.category = uniqueCategory;
-    },
-  },
   extraReducers: (builder) => {
     builder
       .addCase(createUser.pending, (state) => {
@@ -162,9 +113,8 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        console.log(action.payload);
-        state.products.push(action.payload);
-        toast.success("Product added successfully");
+        state.users.push(action.payload);
+        toast.success("User created successfully");
       })
       .addCase(createUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -179,8 +129,7 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        console.log(action.payload);
-        state.products = action.payload;
+        state.users = action.payload;
       })
       .addCase(getUsers.rejected, (state, action) => {
         state.isLoading = false;
@@ -195,7 +144,8 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        toast.success("Product deleted successfully");
+        state.users = state.users.filter(user => user.id !== action.payload.id);
+        toast.success("User deleted successfully");
       })
       .addCase(deleteUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -210,7 +160,7 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        state.product = action.payload;
+        state.user = action.payload;
       })
       .addCase(getUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -218,31 +168,30 @@ const userSlice = createSlice({
         state.message = action.payload;
         toast.error(action.payload);
       })
-      .addCase(updateUesr.pending, (state) => {
+      .addCase(updateUser.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(updateUesr.fulfilled, (state, action) => {
+      .addCase(updateUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        toast.success("Product updated successfully");
+        state.users = state.users.map(user =>
+          user.id === action.payload.id ? action.payload : user
+        );
+        toast.success("User updated successfully");
       })
-      .addCase(updateUesr.rejected, (state, action) => {
+      .addCase(updateUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
         toast.error(action.payload);
       });
-  },
-});
-
-export const { CALC_STORE_VALUE, CALC_OUTOFSTOCK, CALC_CATEGORY } =
-userSlice.actions;
-
-export const selectIsLoading = (state) => state.product.isLoading;
-export const selectProduct = (state) => state.product.product;
-export const selectTotalStoreValue = (state) => state.product.totalStoreValue;
-export const selectOutOfStock = (state) => state.product.outOfStock;
-export const selectCategory = (state) => state.product.category;
-
-export default userSlice.reducer;
+    },
+  });
+  
+  export const selectIsLoading = (state) => state.user.isLoading;
+  export const selectUser = (state) => state.user.user;
+  export const selectUsers = (state) => state.user.users;
+  
+  export default userSlice.reducer;
+  

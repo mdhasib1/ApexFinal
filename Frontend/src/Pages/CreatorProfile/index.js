@@ -3,13 +3,33 @@ import { ethers } from "ethers";
 import React, { useEffect, useState } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import { FiCamera } from 'react-icons/fi';
-import { useNavigate } from 'react-router-dom';
-import { dragon, gif1, gif2, gif3, gif4, gif5, item1, item2, item3, item4, item5, prodToCard, single } from '../../Components/imageImport/index';
-
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from 'react-router-dom';
+import { dragon, prodToCard, single } from '../../Components/imageImport/index';
+import useRedirectLoggedOutUser from '../../customHook/useRedirectLoggedOutUser';
+import { SET_NAME, SET_USER } from "../../redux/features/auth/authSlice";
+import { getUser } from "../../services/authService";
 const CreateProfile = () => {
+  useRedirectLoggedOutUser("/lock-screen");
   const navigate = useNavigate()
   const [nfts, setNFT] = useState({});
-  
+  const dispatch = useDispatch();
+  const [profile, setProfile] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+
+  useEffect(() => {
+    setIsLoading(true);
+    async function getUserData() {
+      const data = await getUser();
+
+      setProfile(data);
+      setIsLoading(false);
+      await dispatch(SET_USER(data));
+      await dispatch(SET_NAME(data.name));
+    }
+    getUserData();
+  }, [dispatch]);
 
   const [abi,setAbi] = useState([])
   const [address,setAddress] = useState('')
@@ -85,101 +105,8 @@ getWalletAddress()
     }
   }, []);
 
-  const onSaleData = [
-    {
-      image: gif1,
-      title: 'Deep Sea Phantasy',
-      type: 'GIFs',
-      id: 'May 29, 2022 6:0:0'
-    },
-    {
-      image: item1,
-      title: 'CyberPrimal 042 LAN',
-      type: 'Arts',
-      id: ''
-    },
-    {
-      image: gif2,
-      title: 'Crypto Egg Stamp #5',
-      type: 'Games',
-      id: ''
-    },
-  ]
 
 
-
-  const activityData = [
-    {
-      title: 'Digital Art Collection',
-      author: 'Panda',
-      time: '1 hours ago',
-      favorite: 'Started Following',
-      image: item1,
-    },
-    {
-      title: 'Skrrt Cobain Official',
-      author: 'ButterFly',
-      time: '2 hours ago',
-      favorite: 'Liked by',
-      image: gif1,
-    },
-    {
-      title: 'Wow! That Brain Is Floating',
-      author: 'ButterFly',
-      time: '2 hours ago',
-      favorite: 'Liked by',
-      image: item2,
-    },
-    {
-      title: 'Our Journey Start',
-      author: 'CalvinCarlo',
-      time: '5 hours ago',
-      favorite: 'Listed by',
-      image: item3,
-    },
-    {
-      title: 'BitBears',
-      author: 'ButterFly',
-      time: '8 hours ago',
-      favorite: 'Liked by',
-      image: gif2,
-    },
-    {
-      title: 'Little Kokeshi #13',
-      author: 'ButterFly',
-      time: '10 hours ago',
-      favorite: 'Liked by',
-      image: item4,
-    },
-    {
-      title: 'EVOL Floater',
-      author: 'CutieGirl',
-      time: '13 hours ago',
-      favorite: 'Started Following',
-      image: gif3,
-    },
-    {
-      title: 'Smart Ape Club (SAC) - Limited Edition',
-      author: 'CalvinCarlo',
-      time: '18 hours ago',
-      favorite: 'Listed by',
-      image: gif4,
-    },
-    {
-      title: 'THE SECRET SOCIETY XX #775',
-      author: 'CalvinCarlo',
-      time: '23 hours ago',
-      favorite: 'Listed by',
-      image: gif5,
-    },
-    {
-      title: 'Create Your Own World',
-      author: 'ButterFly',
-      time: '24 hours ago',
-      favorite: 'Liked by',
-      image: item5,
-    },
-  ]
 
   const loadFile = function (event) {
     var image = document.getElementById(event.target.name)
@@ -248,11 +175,11 @@ getWalletAddress()
                 </div>
 
                 <div className="content mt-3">
-                  <h5 className="mb-3 text-light">MD HASIB</h5>
+                  <h5 className="mb-3 text-light">{profile?.name}</h5>
 
                   <div className="mt-4">
-                    <a
-                      href="/creator-profile-edit"
+                    <Link
+                      to="/creator-profile-edit"
                       onClick={e => {
                         e.preventDefault()
                         navigate('/creator-profile-edit')
@@ -260,7 +187,7 @@ getWalletAddress()
                       className="btn btn-pills btn-outline-primary mx-1"
                     >
                       Edit Profile
-                    </a>
+                    </Link>
         
                   </div>
                 </div>
@@ -443,14 +370,10 @@ getWalletAddress()
                   role="tabpanel"
                   aria-labelledby="About-tab"
                 >
-                  <h5 className="mb-4 text-light">Calvin Carlo</h5>
+                  <h5 className="mb-4 text-light">{profile?.name}</h5>
 
                   <p className="text-light mb-0">
-                    I have started my career as a trainee and prove my self and
-                    achieve all the milestone with good guidance and reach up to
-                    the project manager. In this journey, I understand all the
-                    procedure which make me a good developer, team leader, and a
-                    project manager.
+                   {profile?.bio}
                   </p>
                 </div>
               </div>

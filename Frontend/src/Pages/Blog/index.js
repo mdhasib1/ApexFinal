@@ -113,15 +113,15 @@ const Blog = () => {
                 style={{ backgroundColor: 'transparent' }}
               >
                 <li className="breadcrumb-item">
-                  <a
-                    href="/index"
+                  <Link
+                    to="/index"
                     onClick={e => {
                       e.preventDefault()
                       navigate('/index')
                     }}
                   >
                     Superex
-                  </a>
+                  </Link>
                 </li>
                 <li className="breadcrumb-item active" aria-current="page">
                   Blogs
@@ -191,8 +191,8 @@ const Blog = () => {
                         read
                       </li>
                     </ul>
-                    <a
-                      href="/blog-detail"
+                    <Link
+                      to="/blog-detail"
                       onClick={e => {
                         e.preventDefault()
                         navigate('/blog-detail')
@@ -200,11 +200,11 @@ const Blog = () => {
                       className="text-dark title h5 mt-3"
                     >
                       {blog?.title}
-                    </a>
+                    </Link>
 
                     <div className="mt-3 d-flex justify-content-between align-items-center">
-                      <a
-                        href="/blog-detail"
+                      <Link
+                        to="/blog-detail"
                         onClick={e => {
                           e.preventDefault()
                           navigate('/blog-detail')
@@ -212,11 +212,11 @@ const Blog = () => {
                         className="btn btn-link text-muted"
                       >
                         Read more <FiArrowRight className="fea icon-sm" />
-                      </a>
+                      </Link>
                       <span className="text-muted fs-6">
                         by{' '}
-                        <a
-                          href="/creator-profile"
+                        <Link
+                          to="/creator-profile"
                           onClick={e => {
                             e.preventDefault()
                             navigate('/creator-profile')
@@ -224,7 +224,7 @@ const Blog = () => {
                           className="link"
                         >
                           {blog?.createdBy}
-                        </a>
+                        </Link>
                       </span>
                     </div>
                   </div>

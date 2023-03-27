@@ -9,10 +9,11 @@ const {
   // updateNFTs,
   // deleteNFTs,
   // ownerPercentage,
-  // fetchMyNFTs,
+  fetchMyNFTs,
   buyNFT,
-  // resale,
-  // myNFTsCreated,
+  resale,
+  myNFTsCreated,
+  getTopAuthors,
   // placeBid,
 } = require("../Controllers/nftControllers");
 
@@ -22,10 +23,14 @@ router.post("/" ,upload, createNFTs);
 // router.put("/:id" , updateNFTs);
 // router.delete("/:id" , deleteNFTs);
 // router.put("/:id/ownerPercentage" , ownerPercentage);
-// router.get("/:owner" , fetchMyNFTs);
+router.get("/:owner" , fetchMyNFTs);
 router.put("/:tokenId" , buyNFT);
-// router.post("/:id" , resale);
-// router.get("/" , myNFTsCreated);
+router.post("/:id" , resale);
+router.get("/mynfts" , myNFTsCreated);
+router.get('/authors/top', getTopAuthors);
+
+
+
 
 // router.post("/:id/placeBid" , placeBid);
 

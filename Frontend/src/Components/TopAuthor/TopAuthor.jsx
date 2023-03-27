@@ -1,90 +1,21 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Col, Container, Image, Row } from "react-bootstrap";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
+
+
+const API_URL = `${BACKEND_URL}/api/nfts/authors/top`;
 const TopAuthorsSection = () => {
-  const authors = [
-    {
-      name: "Author 1",
-      sales: 1234,
-      profileImageUrl: "https://randomuser.me/api/portraits/men/1.jpg",
-    },
-    {
-      name: "Author 2",
-      sales: 987,
-      profileImageUrl: "https://randomuser.me/api/portraits/women/2.jpg",
-    },
-    {
-      name: "Author 3",
-      sales: 456,
-      profileImageUrl: "https://randomuser.me/api/portraits/men/3.jpg",
-    },
-    {
-      name: "Author 4",
-      sales: 456,
-      profileImageUrl: "https://randomuser.me/api/portraits/men/3.jpg",
-    },
-    {
-      name: "Author 5",
-      sales: 456,
-      profileImageUrl: "https://randomuser.me/api/portraits/men/3.jpg",
-    },
-    {
-      name: "Author 6",
-      sales: 456,
-      profileImageUrl: "https://randomuser.me/api/portraits/men/3.jpg",
-    },
-    {
-      name: "Author 7",
-      sales: 456,
-      profileImageUrl: "https://randomuser.me/api/portraits/men/3.jpg",
-    },
-    {
-      name: "Author 8",
-      sales: 456,
-      profileImageUrl: "https://randomuser.me/api/portraits/men/3.jpg",
-    },
-    {
-      name: "Author 9",
-      sales: 456,
-      profileImageUrl: "https://randomuser.me/api/portraits/men/3.jpg",
-    },
-    {
-      name: "Author 10",
-      sales: 456,
-      profileImageUrl: "https://randomuser.me/api/portraits/men/3.jpg",
-    },
-    {
-      name: "Author 11",
-      sales: 456,
-      profileImageUrl: "https://randomuser.me/api/portraits/men/3.jpg",
-    },
-    {
-      name: "Author 12",
-      sales: 456,
-      profileImageUrl: "https://randomuser.me/api/portraits/men/3.jpg",
-    },
-    {
-      name: "Author 13",
-      sales: 456,
-      profileImageUrl: "https://randomuser.me/api/portraits/men/3.jpg",
-    },
-    {
-      name: "Author 14",
-      sales: 456,
-      profileImageUrl: "https://randomuser.me/api/portraits/men/3.jpg",
-    },
-    {
-      name: "Author 15",
-      sales: 456,
-      profileImageUrl: "https://randomuser.me/api/portraits/men/3.jpg",
-    },
-    {
-      name: "Author 16",
-      sales: 456,
-      profileImageUrl: "https://randomuser.me/api/portraits/men/3.jpg",
-    },
 
-  ];
+  const [authors , setAuthors] = useState([])
+
+  useEffect(()=>{
+    axios.get(API_URL)
+    .then((res)=>{
+      setAuthors(res.data)
+    })
+  },[])
 
   return (
     <section className="transparent py-5">

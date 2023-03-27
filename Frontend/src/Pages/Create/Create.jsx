@@ -1,14 +1,20 @@
 import axios from 'axios'
+import { Buffer } from 'buffer'
 import { ethers } from 'ethers'
 import React, { useEffect, useState } from 'react'
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form'
+import Modal from 'react-bootstrap/Modal'
+import "react-confirm-alert/src/react-confirm-alert.css"
 import LoadingScreen from 'react-loading-screen'
 import { useNavigate } from 'react-router-dom'
 import { toast } from "react-toastify"
 import './Upload.css'
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
-import { Buffer } from 'buffer'
 
-const BACKEND_URL = process.env.API
+
+const API_URL = `${BACKEND_URL}/api`;
 
 
 
@@ -24,6 +30,22 @@ const UploadWork = () => {
   const [author,setAuthor] =useState('')
   const [endTime, setEndTime] = useState('');
   const [imageURI,setImageURI] = useState('')
+
+  const [collection, setCollection] = useState([])
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [collectionName , setCollectionName] = useState('')
+  const [collectiondes , setCollectionDes] = useState('')
+
+
+
+  useEffect(()=>{
+      axios.get(`${API_URL}/collection`)
+      .then((res)=>{
+        setCollection(res.data)
+      })
+  },[])
 
 
 
@@ -64,11 +86,38 @@ useEffect(() => {
 
    const[abi,setAbi] = useState([])
    useEffect(()=>{
-    axios.get(`http://localhost:8000/api/abi`)
+    axios.get(`${API_URL}/abi`)
     .then((response)=>{
       setAbi(response.data.abi)
     })
   })
+
+  const handCollection = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("collectionname", collectionName);
+    formData.append("collectiondes", collectiondes);
+    formData.append("file", imageURI);
+  
+    // Log FormData entries
+    for (let pair of formData.entries()) {
+      console.log(pair[0] + ": " + pair[1]);
+    }
+  
+    axios.post(API_URL, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((res)=>{
+      if(res.status === 201){
+        handleClose()
+        navigate('/all-collection')
+      }
+      
+    })
+  }
+
 
 
   const contractAddress = "0x3d242326441D640278a163A4169F4F1Ef6569FE4";
@@ -140,21 +189,6 @@ const handleImageChange = async (e) => {
 };
 
   
-
-  // const handleImageChange = e => {
-  //   e.preventDefault();
-
-  //   let reader = new FileReader();
-  //   let file = e.target.files[0];
-
-  //   reader.onloadend = () => {
-  //     setFile(file);
-  //     const parent = document.querySelector('.preview-box')
-  //     parent.innerHTML = `<img className="preview-content" src=${reader.result} />`
-  //   };
-
-  //   reader.readAsDataURL(file);
-  // };
 
 
   const handleSubmit = async (event) => {
@@ -229,7 +263,7 @@ const handleImageChange = async (e) => {
         sold: false,
       };
   
-      const response = await axios.post('http://localhost:8000/api/nfts', nftData);
+      const response = await axios.post(`${API_URL}/nfts`, nftData);
   
       if (response.data.success === true) {
         setIsLoading(false);
@@ -247,6 +281,7 @@ const handleImageChange = async (e) => {
   
 
   return (
+    <>
        <LoadingScreen
       loading={isLoading}
       bgColor='linear-gradient(
@@ -334,11 +369,13 @@ const handleImageChange = async (e) => {
                         <div className="col-md-6 mb-4">
                           <label className="form-label fw-bold">Select Your Collection :</label>
                           <select className="form-control" name="nftcollection" onChange={(e)=>setNFTCollection(e.target.value)}  required>
-                            <option value={1} >GIFs</option>
-                            <option value={2}>Music</option>
-                            <option value={3}>Video</option>
-                            <option value={4} >Tech</option>
+                            {collection.map((coll,index)=>{
+                              return(
+                                <option value={coll.collectionname} >{coll.collectionname}</option>
+                              )
+                            })}
                           </select>
+                          <button onClick={handleShow} style={{ backgroundColor: 'blue' }} className='btn btn-primary'>Add Collection</button>
                         </div>
                         {/*end col*/}
 
@@ -425,7 +462,66 @@ const handleImageChange = async (e) => {
       {/*end container*/}
     </section>
     </LoadingScreen>
-
+    <Modal show={show} onHide={handleClose} centered>
+    <Form onSubmit={handCollection}>
+        <Modal.Header closeButton>
+          <Modal.Title  className='text-light'>Add Collection</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+       
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label className='text-light'>Collection Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Collection name"
+                autoFocus
+                name="collectionname"
+                value={collectionName}
+                onChange={(e)=> setCollectionName(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label className='text-light'>Collection Cover</Form.Label>
+              <div className="d-grid">
+                        <div className="preview-box d-block justify-content-center rounded-md shadow overflow-hidden bg-light text-muted p-2 text-center small">
+                          Supports JPG, PNG and MP4 videos. Max file size : 10MB.
+                        </div>
+                        <input
+                          type="file"
+                          id="input-file"
+                          name="image"
+                          accept="image/*"
+                          onChange={handleImageChange}
+                          hidden
+                          required
+                        />
+                        <label
+                          className="btn-upload btn btn-primary rounded-md mt-4"
+                          htmlFor="input-file"
+                        >
+                          Upload Image
+                        </label>
+                      </div>
+            </Form.Group>
+            <Form.Group
+              className="mb-3"
+              controlId="exampleForm.ControlTextarea1"
+            >
+              <Form.Label className='text-light'> Collection Description</Form.Label>
+              <Form.Control name="collectiondes" value={collectiondes} required  onChange={(e)=> setCollectionDes(e.target.value)} as="textarea" rows={3} />
+            </Form.Group>
+      
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" type='submit'>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+        </Form>
+      </Modal></>
   )
 }
 

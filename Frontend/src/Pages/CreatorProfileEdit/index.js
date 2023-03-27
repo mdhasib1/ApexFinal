@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { FiCamera } from 'react-icons/fi'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { banner, dragon } from '../../Components/imageImport/index'
 
 
@@ -48,15 +48,15 @@ const CreatorProfileEdit = () => {
                 style={{ backgroundColor: 'transparent' }}
               >
                 <li className="breadcrumb-item">
-                  <a
-                    href="index"
+                  <Link
+                    to="/"
                     onClick={e => {
                       e.preventDefault()
-                      navigate('/index')
+                      navigate('/')
                     }}
                   >
                     DRAGON
-                  </a>
+                  </Link>
                 </li>
                 <li className="breadcrumb-item active" aria-current="page">
                   Profile Edit

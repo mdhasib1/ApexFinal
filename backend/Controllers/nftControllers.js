@@ -330,6 +330,17 @@ const resale = asyncHandler(async (req, res) => {
   }
 });
 
+const munfts = asyncHandler(async(req,res)=>{
+  try {
+    const address = req.params.address
+    if(!web3.utils.isAddress(address)){
+      return res.status(400).json({error : 'Inva'})
+    }
+  } catch (error) {
+    
+  }
+})
+
 const myNFTsCreated = asyncHandler(async (req, res) => {
   try {
     const marketItems = await MarketItem.find({ seller: req.user });
@@ -395,6 +406,47 @@ const withdrawBalance = asyncHandler(async (req, res) => {
   }
 });
 
+
+const getTopAuthors = asyncHandler(async (req, res) => {
+  const topAuthors = await MarketItem.aggregate([
+    {
+      $group: {
+        _id: '$author',
+        itemCount: { $sum: 1 },
+      },
+    },
+    {
+      $sort: { itemCount: -1 },
+    },
+    {
+      $limit: 20,
+    },
+    {
+      $lookup: {
+        from: 'users',
+        localField: '_id',
+        foreignField: 'address',
+        as: 'user',
+      },
+    },
+    {
+      $unwind: '$user',
+    },
+    {
+      $project: {
+        _id: 0,
+        authorAddress: '$_id',
+        itemCount: 1,
+        user: '$user',
+      },
+    },
+  ]);
+
+  res.json(topAuthors);
+});
+
+
+
 module.exports = {
   getNFTs,
   createNFTs,
@@ -410,6 +462,7 @@ module.exports = {
   withdrawBalance,
   upload,
   getNFTById,
-  getAuthor
+  getAuthor,
+  getTopAuthors
 
 };

@@ -19,12 +19,12 @@ const menu = [
   {
     title: "Users",
     icon: <FaUsers />,
-    path: "/users",
+    path: "/all-users",
   },
   {
     title: "Collection",
     icon: <MdCollections />,
-    path: "/users",
+    path: "/all-collection",
   },
 
   {
@@ -45,9 +45,9 @@ const menu = [
     path: "/allcourse",
   },
   {
-    title: "Slider",
+    title: "HomePage",
     icon: <FcDocument />,
-    path: "/allcourse",
+    path: "/home-content",
   },
   {
     title: "Terms and condition",
@@ -62,7 +62,7 @@ const menu = [
   {
     title: "Partner Logo",
     icon: <FcDocument />,
-    path: "/allcourse",
+    path: "/partner",
   },
   {
     title: "Partner Logo",

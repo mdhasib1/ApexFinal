@@ -102,8 +102,8 @@ const Blog = () => {
                           </Link>
                           <span className="text-muted fs-6">
                             by{" "}
-                            <a
-                              href="/creator-profile"
+                            <Link
+                              to="/creator-profile"
                               onClick={(e) => {
                                 e.preventDefault();
                                 navigate("/creator-profile");
@@ -111,7 +111,7 @@ const Blog = () => {
                               className="link"
                             >
                               {data?.createdBy}
-                            </a>
+                            </Link>
                           </span>
                         </div>
                       </div>

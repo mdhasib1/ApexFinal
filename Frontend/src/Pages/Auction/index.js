@@ -111,15 +111,15 @@ const Auction = () => {
                 style={{ backgroundColor: 'transparent' }}
               >
                 <li className="breadcrumb-item">
-                  <a
-                    href="/index"
+                  <Link
+                    to="/index"
                     onClick={e => {
                       e.preventDefault()
                       navigate('/index')
                     }}
                   >
                     Superex
-                  </a>
+                  </Link>
                 </li>
                 <li className="breadcrumb-item active" aria-current="page">
                   Auction
@@ -172,15 +172,15 @@ const Auction = () => {
                     </div>
 
                     <div className="nft-image rounded-md mt-3 position-relative overflow-hidden">
-                      <a
-                        href="/item-detail-one"
+                      <Link
+                        to="/item-detail-one"
                         onClick={e => {
                           e.preventDefault()
                           navigate('/item-detail-one')
                         }}
                       >
                         <img src={data?.image} className="img-fluid" alt="" />
-                      </a>
+                      </Link>
                       <div className="position-absolute top-0 start-0 m-2">
                         <Link
                           onClick={e => e.preventDefault()}
@@ -214,8 +214,8 @@ const Auction = () => {
                     </div>
 
                     <div className="card-body content position-relative p-0 mt-3">
-                      <a
-                        href="/item-detail-one"
+                      <Link
+                        to="/item-detail-one"
                         onClick={e => {
                           e.preventDefault()
                           navigate('/item-detail-one')
@@ -223,7 +223,7 @@ const Auction = () => {
                         className="title text-dark h6"
                       >
                         {data?.title}
-                      </a>
+                      </Link>
 
                       <div className="d-flex align-items-center justify-content-between mt-3">
                         <div className="">
@@ -232,8 +232,8 @@ const Auction = () => {
                           </small>
                           <small className="rate fw-bold">20.5 ETH</small>
                         </div>
-                        <a
-                          href="/item-detail-one"
+                        <Link
+                          to="/item-detail-one"
                           onClick={e => {
                             e.preventDefault()
                             navigate('/item-detail-one')
@@ -241,7 +241,7 @@ const Auction = () => {
                           className="btn btn-icon btn-pills btn-primary"
                         >
                           <i className="uil uil-shopping-bag"></i>
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>

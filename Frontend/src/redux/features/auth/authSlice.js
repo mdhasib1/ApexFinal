@@ -1,21 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const token = JSON.parse(localStorage.getItem("token"));
+const userItem = localStorage.getItem("user");
+const user = userItem && userItem !== "undefined" ? JSON.parse(userItem) : null;
 
 const initialState = {
-  isLoggedIn: false,
-  name: token ? token : "",
+  isLoggedIn: user ? true : false,
+  name: user ? user.name : "",
   user: {
+    address: "",
     name: "",
     email: "",
     phone: "",
     bio: "",
-    status:"",
-    role:"",
-    token:"",
+    role: "",
+    token: "",
     photo: "",
   },
 };
+
 
 const authSlice = createSlice({
   name: "auth",
@@ -25,15 +27,17 @@ const authSlice = createSlice({
       state.isLoggedIn = action.payload;
     },
     SET_NAME(state, action) {
-      localStorage.setItem("token", JSON.stringify(action.payload));
-      state.name = action.payload;
+      const user = action.payload;
+      localStorage.setItem("user", JSON.stringify(user));
+      state.name = user.name;
+      state.user.token = user.token; // Also set the token to the user object
     },
     SET_USER(state, action) {
       const profile = action.payload;
+      state.user.address = profile.address;
       state.user.name = profile.name;
       state.user.email = profile.email;
       state.user.phone = profile.phone;
-      state.user.status = profile.status;
       state.user.bio = profile.bio;
       state.user.photo = profile.photo;
     },
@@ -45,5 +49,7 @@ export const { SET_LOGIN, SET_NAME, SET_USER } = authSlice.actions;
 export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
 export const selectName = (state) => state.auth.name;
 export const selectUser = (state) => state.auth.user;
+export const selectToken = (state) => state.auth.user.token; // Add this line
+
 
 export default authSlice.reducer;

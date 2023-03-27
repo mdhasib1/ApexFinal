@@ -45,7 +45,7 @@ const Explorer = () => {
           ))
         ) : (
           <Col>
-            <p>No results found.</p>
+            <p className='text-center text-light fs-1'>No NFTs found.</p>
           </Col>
         )}
       </Row>

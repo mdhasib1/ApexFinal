@@ -64,8 +64,8 @@ const Footer = () => {
                         </Link>
                       </li>
                       <li>
-                        <a
-                          href="/auction"
+                        <Link
+                          to="/auction"
                           onClick={e => {
                             e.preventDefault()
                             navigate('/auction')
@@ -74,12 +74,12 @@ const Footer = () => {
                         >
                           <i className="uil uil-angle-right-b me-1"></i> Live
                           Auction
-                        </a>
+                        </Link>
                       </li>
              
                       <li>
-                        <a
-                          href="/creators"
+                        <Link
+                          to="/creators"
                           onClick={e => {
                             e.preventDefault()
                             navigate('/creators')
@@ -88,7 +88,7 @@ const Footer = () => {
                         >
                           <i className="uil uil-angle-right-b me-1"></i>{' '}
                           Creators
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   </div>
@@ -164,8 +164,8 @@ const Footer = () => {
               <div className="col-sm-6 mt-4 mt-sm-0 pt-2 pt-sm-0">
                 <ul className="list-unstyled footer-list text-sm-end mb-0">
                   <li className="list-inline-item mb-0">
-                    <a
-                      href="/privacy"
+                    <Link
+                      to="/privacy"
                       onClick={e => {
                         e.preventDefault()
                         navigate('/privacy')
@@ -173,11 +173,11 @@ const Footer = () => {
                       className="text-foot me-2"
                     >
                       Privacy
-                    </a>
+                    </Link>
                   </li>
                   <li className="list-inline-item mb-0">
-                    <a
-                      href="/terms"
+                    <Link
+                      to="/terms"
                       onClick={e => {
                         e.preventDefault()
                         navigate('/terms')
@@ -185,11 +185,11 @@ const Footer = () => {
                       className="text-foot me-2"
                     >
                       Terms
-                    </a>
+                    </Link>
                   </li>
                   <li className="list-inline-item mb-0">
-                    <a
-                      href="/about"
+                    <Link
+                      to="/about"
                       onClick={e => {
                         e.preventDefault()
                         navigate('/about')
@@ -197,11 +197,11 @@ const Footer = () => {
                       className="text-foot me-2"
                     >
                       About Us
-                    </a>
+                    </Link>
                   </li>
                   <li className="list-inline-item mb-0">
-                    <a
-                      href="/contact"
+                    <Link
+                      to="/contact"
                       onClick={e => {
                         e.preventDefault()
                         navigate('/contact')
@@ -209,7 +209,7 @@ const Footer = () => {
                       className="text-foot"
                     >
                       Contact
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -261,13 +261,13 @@ const Footer = () => {
                   MetaMask. Please click and check the details,
                 </p>
 
-                <a
-                  href="https://metamask.io/"
+                <Link
+                  to="https://metamask.io/"
                   className="btn btn-link primary text-primary fw-bold"
                   target="_blank" rel="noreferrer"
                 >
                   MetaMask
-                </a>
+                </Link>
               </div>
             </div>
           </div>

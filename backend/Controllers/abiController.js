@@ -1,7 +1,7 @@
-
-const asyncHandeler = require("express-async-handler");
-const ApexNFTCard = require('../ABI/ApexNFTCard.json')
+const asyncHandeler =require('express-async-handler');
+const ApexNFTCard =require('../ABI/ApexNFTCard.json');
 const ABI = ApexNFTCard
+
 
 
 
@@ -17,5 +17,5 @@ const getAbi = asyncHandeler(async(req,res)=>{
 
 
 module.exports={
-  getAbi
+  getAbi,
 }

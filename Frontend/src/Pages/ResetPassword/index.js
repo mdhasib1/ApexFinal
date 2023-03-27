@@ -78,8 +78,8 @@ function ResetPassword() {
                             <span className="text-muted me-2">
                               Remember your password ?{' '}
                             </span>
-                            <a
-                              href="/login"
+                            <Link
+                              to="/login"
                               onClick={e => {
                                 e.preventDefault()
                                 navigate('/login')
@@ -87,7 +87,7 @@ function ResetPassword() {
                               className="text-dark fw-bold"
                             >
                               Sign in
-                            </a>
+                            </Link>
                           </small>
                         </div>
                         {/* end col*/}

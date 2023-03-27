@@ -4,31 +4,33 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const API_URL = `${BACKEND_URL}/api/users/getUsers`;
 
-// Create New Product
+// Create New User
 const createUsers = async (formData) => {
   const response = await axios.post(API_URL, formData);
   return response.data;
 };
 
-// Get all products
+// Get all Users
 const getUsers = async () => {
   const response = await axios.get(API_URL);
   return response.data;
 };
 
-// Delete a Product
+// Delete a User
 const deleteUser = async (id) => {
-  const response = await axios.delete(API_URL + id);
+  const response = await axios.delete(`${API_URL}/${id}`);
   return response.data;
 };
-// Get a Product
+
+// Get a User
 const getUser = async (id) => {
-  const response = await axios.get(API_URL + id);
+  const response = await axios.get(`${API_URL}/${id}`);
   return response.data;
 };
-// Update Product
+
+// Update User
 const updateUser = async (id, formData) => {
-  const response = await axios.patch(`${API_URL}${id}`, formData);
+  const response = await axios.patch(`${API_URL}/${id}`, formData);
   return response.data;
 };
 
